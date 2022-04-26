@@ -10,6 +10,6 @@ DEPLOY_NAME=$(cat deploy.json | jq -r ".name")
 
 DEPLOY_DOCKER_REGISTRY="registry.comame.dev"
 
-eval "docker run -t $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME ."
+eval "docker build -t $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME ."
 eval "docker push $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME"
 eval "kubectl rollout restart deploy/$DEPLOY_NAME -n $DEPLOY_NAMESPACE"
